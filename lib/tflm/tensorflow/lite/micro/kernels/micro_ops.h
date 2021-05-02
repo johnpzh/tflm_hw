@@ -49,7 +49,10 @@ TfLiteRegistration Register_L2_POOL_2D();
 TfLiteRegistration Register_LEAKY_RELU();
 TfLiteRegistration Register_LOG_SOFTMAX();
 TfLiteRegistration Register_QUANTIZE();
+<<<<<<< HEAD
 TfLiteRegistration Register_RESIZE_BILINEAR();
+=======
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
 TfLiteRegistration Register_SHAPE();
 TfLiteRegistration Register_SOFTMAX();
 TfLiteRegistration Register_SPACE_TO_BATCH_ND();

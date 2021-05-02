@@ -44,11 +44,14 @@ inline int ComputePaddingWithOffset(int stride, int dilation_rate, int in_size,
 inline int ComputeOutSize(TfLitePadding padding, int image_size,
                           int filter_size, int stride, int dilation_rate = 1) {
   int effective_filter_size = (filter_size - 1) * dilation_rate + 1;
+<<<<<<< HEAD
 
   // TODO(b/186448822): This uses 0 since the function has no other way to
   // report error case
   if (stride == 0) return 0;
 
+=======
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
   switch (padding) {
     case kTfLitePaddingSame:
       return (image_size + stride - 1) / stride;

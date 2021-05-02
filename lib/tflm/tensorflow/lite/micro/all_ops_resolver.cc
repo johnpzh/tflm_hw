@@ -73,7 +73,10 @@ AllOpsResolver::AllOpsResolver() {
   AddRelu();
   AddRelu6();
   AddReshape();
+<<<<<<< HEAD
   AddResizeBilinear();
+=======
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
   AddResizeNearestNeighbor();
   AddRound();
   AddRsqrt();

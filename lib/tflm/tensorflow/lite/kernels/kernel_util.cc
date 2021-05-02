@@ -333,6 +333,7 @@ TfLiteStatus GetQuantizedConvolutionMultipler(TfLiteContext* context,
 }
 
 namespace {
+<<<<<<< HEAD
 
 inline TfLiteStatus Quantize(TfLiteContext* context, float scale,
                              int32_t zero_point, float f, int32_t& q) {
@@ -371,11 +372,36 @@ TfLiteStatus CalculateActivationRangeQuantizedImpl(
     TF_LITE_ENSURE_OK(context,
                       Quantize(context, scale, zero_point, 1.0, tmp_q));
     *act_max = std::min(qmax, tmp_q);
+=======
+void CalculateActivationRangeQuantizedImpl(TfLiteFusedActivation activation,
+                                           int32_t qmin, int32_t qmax,
+                                           TfLiteTensor* output,
+                                           int32_t* act_min, int32_t* act_max) {
+  const auto scale = output->params.scale;
+  const auto zero_point = output->params.zero_point;
+
+  auto quantize = [scale, zero_point](float f) {
+    return zero_point + static_cast<int32_t>(TfLiteRound(f / scale));
+  };
+
+  if (activation == kTfLiteActRelu) {
+    *act_min = std::max(qmin, quantize(0.0));
+    *act_max = qmax;
+  } else if (activation == kTfLiteActRelu6) {
+    *act_min = std::max(qmin, quantize(0.0));
+    *act_max = std::min(qmax, quantize(6.0));
+  } else if (activation == kTfLiteActReluN1To1) {
+    *act_min = std::max(qmin, quantize(-1.0));
+    *act_max = std::min(qmax, quantize(1.0));
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
   } else {
     *act_min = qmin;
     *act_max = qmax;
   }
+<<<<<<< HEAD
   return kTfLiteOk;
+=======
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
 }
 }  // namespace
 
@@ -399,8 +425,14 @@ TfLiteStatus CalculateActivationRangeQuantized(TfLiteContext* context,
     TF_LITE_ENSURE(context, false);
   }
 
+<<<<<<< HEAD
   return CalculateActivationRangeQuantizedImpl(context, activation, qmin, qmax,
                                                output, act_min, act_max);
+=======
+  CalculateActivationRangeQuantizedImpl(activation, qmin, qmax, output, act_min,
+                                        act_max);
+  return kTfLiteOk;
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
 }
 
 bool HaveSameShapes(const TfLiteTensor* input1, const TfLiteTensor* input2) {

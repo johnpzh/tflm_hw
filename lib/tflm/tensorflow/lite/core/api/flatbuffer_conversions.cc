@@ -667,6 +667,10 @@ TfLiteStatus ParseOpDataTfLite(const Operator* op, BuiltinOperator op_type,
       return kTfLiteOk;
     }
     case BuiltinOperator_DELEGATE: {
+<<<<<<< HEAD
+=======
+      // TODO(ycling): Revisit when supporting saving delegated models.
+>>>>>>> 92444e09d425334ee15efbc55a1bae035ffe2922
       TF_LITE_REPORT_ERROR(error_reporter,
                            "DELEGATE op shouldn't exist in model.");
       return kTfLiteError;
